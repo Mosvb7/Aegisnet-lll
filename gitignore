@@ -1,14 +1,14 @@
-# ── Secrets ───────────────────────────────────────────────────
+# ── Secrets -----
 .env
 GeoIP.conf
 
-# ── Runtime database ──────────────────────────────────────────
+# ── Runtime database 
 alert.db
 
-# ── GeoIP database ────────────────────────────────────────────
+# ── GeoIP database 
 geoip_db/
 
-# ── Python ────────────────────────────────────────────────────
+# ── Python ─
 __pycache__/
 *.py[cod]
 *.pyo
@@ -19,15 +19,15 @@ dist/
 build/
 .eggs/
 
-# ── Virtual environments ──────────────────────────────────────
+# ── Virtual environments ────
 venv/
 .venv/
 env/
 
-# ── macOS ─────────────────────────────────────────────────────
+# ── macOS ──
 .DS_Store
 
-# ── IDE ───────────────────────────────────────────────────────
+# ── IDE ────
 .vscode/
 .idea/
 *.swp
