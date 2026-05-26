@@ -1,6 +1,6 @@
 # 🛡️ AegisNet — Network Intrusion Detection & Prevention System
 
-> **Real-time IDS/IPS engine with AI-powered anomaly detection, a live SOC dashboard, packet capture, and auth log monitoring — built for home labs and small networks.**
+> Real-time IDS/IPS engine with AI-powered anomaly detection, a live SOC dashboard, packet capture, and auth log monitoring | built for home labs and small networks.**
 
 ---
 
@@ -141,7 +141,8 @@ Add your own IPs to the whitelist so they are never auto-blocked:
 ```python
 IP_WHITELIST = {
     "127.0.0.1",
-    "192.168.1.1",   # your gateway
+    "192.168.1.1",   # your gateway , and also every IP that out of the blocklist 
+
 }
 ```
 
