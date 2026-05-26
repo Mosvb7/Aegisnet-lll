@@ -122,15 +122,15 @@ def send_notification(subject: str, body: str, ip: str):
 
 # IMPORTANT: Edit this list before running on your network.
 # Any IP here will NEVER be auto-blocked by the engine.
+# Add your gateway, your own machine's IP, and any trusted devices.
+# Example:
+#   "192.168.1.1",    # gateway
+#   "192.168.1.255",  # broadcast
 IP_WHITELIST: set = {
     "127.0.0.1",
-    "192.168.0.1", 
-    "192.168.0.245",
-    "192.168.0.255",
-    "192.168.0.185"  # <- your gateway / local network IP
+  "# localhost — always keep this
+    # Add your own IPs below:
 }
-# "192.168.1.1",      # <- your gateway / local network IP
-    # "192.168.1.255",    # broadcast
 
 # ── BOOT ─────────────────────────────────────────────────────────────────────
 
