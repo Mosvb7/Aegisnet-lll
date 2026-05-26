@@ -30,7 +30,7 @@ import requests # HTTP requests
 import sys # Standard in/out/error 
 import os 
 from datetime import datetime # DateTime 
-# ── CONFIGURATION ─────────────────────────────────────────────────────────────
+# ── CONFIGURATION 
 
 ENGINE_URL    = "http://127.0.0.1:5050/login_fail"  # was 5000
 LOG_FILES     = [
@@ -74,7 +74,7 @@ PATTERNS = [
     ), "pam"),
 ]
 
-# ── HELPERS ───────────────────────────────────────────────────────────────────
+# ── HELPERS 
 
 def find_log() -> str | None:
     """Return the first log file that exists on this system or from args."""
@@ -123,7 +123,7 @@ def send_to_engine(event: dict):
     except Exception as e:
         print(f"[ERR] {e}")
 
-# ── MAIN TAIL LOOP ────────────────────────────────────────────────────────────
+# ── MAIN TAIL LOOP 
 
 def tail(log_path: str):
     """Tail log_path indefinitely, parsing and forwarding failed-login lines."""
@@ -192,7 +192,7 @@ def start():
 
     print(f"[OK]  Engine: {ENGINE_URL}")
 
-    # macOS: use unified log stream instead of a log file
+    # macOS: use unified log stream instead of a log file 
     if is_macos():
         try:
             tail_macos_log()
@@ -223,7 +223,7 @@ if __name__ == "__main__":
 
 
 # geoipupdate -f GeoIP.conf -d geoip.db --> run before running logwatch.py + to update the db 
-# to run: sudo python3 /Users/dr.saeedhamadalhassani/Desktop/Aegisnet_ll/logwatch.py
+# to run: sudo python3 /Users/rootadmin/Desktop/Aegisnet_ll/logwatch.py
 
 
 # ── macOS SUPPORT (replaces the old start() logic) ───────────────────────────
