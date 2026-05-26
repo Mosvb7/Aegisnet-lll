@@ -33,12 +33,12 @@ import io
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 
-ENGINE   = "http://127.0.0.1:5050"
+ENGINE   = "http://127.0.0.1:5050" #choose any ip/server ip
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH  = os.path.join(BASE_DIR, "alert.db")
 
 st.set_page_config(
-    page_title="AegisNet SOC",
+    page_title="AegisNet SOC V3 ",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -53,13 +53,16 @@ try:
 except ImportError:
     pass
 
-DASH_USER  = os.getenv("DASH_USER",  "msvb")
-DASH_USER2 = os.getenv("DASH_USER2", "administrator/sdn#")
-DASH_USER3 = os.getenv("DASH_USER3", "admin8882")
+# Dashboard credentials — set these in your .env file.
+# To generate a hash: python3 -c "import hashlib; print(hashlib.sha256('yourpassword'.encode()).hexdigest())" 
+#SOCAdminstrators 
+DASH_USER  = os.getenv("DASH_USER",  "")
+DASH_USER2 = os.getenv("DASH_USER2", "")
+DASH_USER3 = os.getenv("DASH_USER3", "")
 
-DASH_CODE_HASH  = os.getenv("DASH_CODE_HASH",  hashlib.sha256("9898".encode()).hexdigest())
-DASH_CODE_HASH2 = os.getenv("DASH_CODE_HASH2", hashlib.sha256("1110".encode()).hexdigest())
-DASH_CODE_HASH3 = os.getenv("DASH_CODE_HASH3", hashlib.sha256("rak4".encode()).hexdigest())
+DASH_CODE_HASH  = os.getenv("DASH_CODE_HASH",  "")
+DASH_CODE_HASH2 = os.getenv("DASH_CODE_HASH2", "")
+DASH_CODE_HASH3 = os.getenv("DASH_CODE_HASH3", "")
 
 _USER_HASH_MAP = {
     DASH_USER:  DASH_CODE_HASH,
