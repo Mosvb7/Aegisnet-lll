@@ -1,4 +1,4 @@
-# 🛡️ AegisNet — Network Intrusion Detection & Prevention System
+# 🛡️ AegisNet V3 — Network Intrusion Detection & Prevention System
 
 > Real-time IDS/IPS engine with AI-powered anomaly detection, a live SOC dashboard, packet capture, and auth log monitoring | built for home labs and small networks.**
 
@@ -282,3 +282,4 @@ MIT License — see `LICENSE` for details.
 ---
 
 *Built for educational and home-lab use. Always get permission before monitoring a network you do not own.*
+
