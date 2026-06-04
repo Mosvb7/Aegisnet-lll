@@ -3,6 +3,15 @@
 > Real-time IDS/IPS engine with AI-powered anomaly detection, a live SOC dashboard, packet capture, and auth log monitoring | built for home labs and small networks.**
 
 ---
+Repository Structure
+AegisNet/
+├── realengine.py      # Core IDS/IPS engine
+├── scandash.py        # SOC dashboard
+├── logwatch.py        # Auth log watcher
+├── netcapture.py      # Packet capture module
+├── .env.example       # Template (never commit real .env)
+├── requirements.txt   # pip dependencies
+└── README.md          # With screenshots + architecture
 
 ## Overview
 
@@ -35,7 +44,20 @@ The system is built around four cooperating modules:
 ```
 
 ---
-
+How AegisNet detects each attack
+1. SYN / FIN / XMAS / NULL / ACK Scan
+detect_flag_scan() inspects the raw TCP flags byte of every packet. It classifies the flag combination — 0x02 = SYN, 0x01 = FIN, 0x29 = XMAS (FIN+PSH+URG), 0x00 = NULL, 0x10 = ACK — then keeps a rolling time window per source IP. If the same IP sends 10+ packets of the same scan type to distinct ports within 5 seconds, it fires. Risk score: 88.
+2. Port Scan (generic fallback)
+detect_port_scan() tracks distinct destination ports per source IP in a 5-second window. If any IP touches 10+ different ports in that window — regardless of TCP flags — it triggers. This catches UDP-based scanners and anything that slips past the flag detector. Risk score: 82.
+3. DDoS
+Inside analyse_flow(), if a single source IP sends 1000+ packets within one 5-second flow window, it's flagged as DDoS. The pps (packets per second) value is calculated and stored in the alert's extra JSON. Risk score: 95 — the highest in the system.
+4. Brute Force
+logwatch.py tails /var/log/auth.log in real time, matches SSH failures, PAM errors, FTP failures, and sudo failures with regex patterns, then POSTs each hit to /login_fail on the engine. record_login_fail() keeps an in-memory list of timestamps per IP. If 5+ failures arrive within 60 seconds, the flow analyser flags it as Brute Force. Risk score: 90.
+5. AI Anomaly (IsolationForest)
+This is the catch-all. Any flow that didn't match the four rules above gets passed to a trained IsolationForest model with three features: packet_count, duration, and port_count. The model was trained on 60 synthetic samples covering normal traffic, bulk transfers, scan-like patterns, and DDoS-like spikes. If it returns -1 (anomaly), the flow is flagged as Suspicious Activity. Risk score: 72.
+Severity thresholds:
+ScoreSeverityAuto-block?88 – 100HighYes — iptables DROP + notification70 – 87MediumNo< 70LowNo
+These are all in realengine.py and every threshold (PORT_SCAN_THRESHOLD, DDOS_PKT_THRESHOLD, BRUTE_FORCE_THRESHOLD) is a constant at the top of the file — easy to tune for your network.
 ## Features
 
 ### Detection (IDS)
