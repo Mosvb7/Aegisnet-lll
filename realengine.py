@@ -39,8 +39,8 @@ from sklearn.ensemble import IsolationForest
 
 # ── CONFIGURATION ────────────────────────────────────────────────────────────
 
-SNIFF_INTERFACE       = "en0"           # active macOS interface
-LAN_SUBNET            = "192.168.0.0/24"
+SNIFF_INTERFACE       = "en0"           # active macOS interface or eth0 , eth1 , en1 it depends 
+LAN_SUBNET            = "10.30.11.44/16"
 GEOIP_DB_PATH          = os.getenv("GEOIP_DB_PATH", "geoip_db/GeoLite2-City.mmdb")
 FLOW_WINDOW           = 5               # seconds per flow bucket
 PORT_SCAN_THRESHOLD   = 10              # distinct ports → scan alert
